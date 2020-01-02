@@ -1,3 +1,4 @@
+import { ServerService } from 'src/app/server.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  isLoading = false;
+
+  constructor(private serverService: ServerService) { }
 
   ngOnInit() {
+
+    this.serverService.loader.subscribe(data => {
+      this.isLoading = data;
+    });
   }
 
 }

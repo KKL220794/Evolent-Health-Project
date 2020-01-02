@@ -38,12 +38,13 @@ export class NewContactComponent implements OnInit {
       status : new FormControl(this.emp.status, Validators.required),
       phno : new FormControl(this.emp.phno, [Validators.required, Validators.
         pattern(/^[1-9][0-9]{2}-[0-9]{3}-[0-9]{4}$/)]),
-      email : new FormControl(this.emp.email, Validators.required),
+      email : new FormControl(this.emp.email, [Validators.required, Validators.email]),
     });
 
   }
 
   onSubmit() {
+    this.sservice.loader.next(true);
     this.emp.fname = this.contactForm.value.fname;
     this.emp.lname = this.contactForm.value.lname;
     this.emp.gender = this.contactForm.value.gender;
@@ -53,9 +54,11 @@ export class NewContactComponent implements OnInit {
     // console.log(this.emp);
     this.contactservice.createNewContact( this.emp);
     this.state = false;
-    this.sservice.saveData();
-    alert('Hoorah!!! Update Successful');
-    this.onCancel();
+    this.sservice.saveData().subscribe(response =>  {
+      this.sservice.loader.next(false);
+      alert('Hoorah!!! Update Successful');
+      this.onCancel();
+    });
     // this.sservice.getData();
   }
 

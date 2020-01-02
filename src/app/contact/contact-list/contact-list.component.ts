@@ -40,16 +40,16 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.router.navigate(['contact' , i]);
 
   }
-  onFilter(f: string) {
-    console.log(typeof(f));
-    this.searched = (f != null || f !== '') ? true : false ;
-    this.filteredContact = (f) ?
-    this.contact.filter( p => (p.fname.toLowerCase().includes(f.toLowerCase())) ||
-    (p.email.toLowerCase().includes(f.toLowerCase())) ||
-    (p.phno.toString().includes(f))) : this.contact;
+  // onFilter(f: string) {
+  //   console.log(this.contact);
+  //   this.searched = (f != null || f !== '') ? true : false ;
+  //   this.filteredContact = (f) ?
+  //   this.contact.filter( p => (p.fname.toLowerCase().includes(f.toLowerCase())) ||
+  //   (p.email.toLowerCase().includes(f.toLowerCase())) ||
+  //   (p.phno.toString().includes(f))) : this.contact;
 
 
-  }
+  // }
 
 
 

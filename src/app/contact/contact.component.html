@@ -1,4 +1,9 @@
 <h1 class="header">Welcome to the Contact Directory Management</h1>
+<div class="loader" *ngIf = "isLoading">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 <hr>
   <div class="row pad">
     <div class="col-lg-7 col-xs-12 ">

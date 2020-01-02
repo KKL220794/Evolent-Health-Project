@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ContactsService } from 'src/app/contacts.service';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ContactModel } from './shared/contactModel.model';
 
 
@@ -11,12 +11,16 @@ import { ContactModel } from './shared/contactModel.model';
 })
 export class ServerService {
 
+  loader = new BehaviorSubject<boolean>(false);
+
   constructor(private contactservice: ContactsService, private http: HttpClient) {
 }
 
   getData() {
+    this.loader.next(true);
     this.http.get('https://contactapp-34a85.firebaseio.com/data.json').subscribe(
       (resp: any) => {
+        this.loader.next(false);
         const data: ContactModel[] = resp ;
         this.contactservice.updateFromServer(data);
         // return data;
@@ -26,10 +30,9 @@ export class ServerService {
     );
   }
 
-  saveData() {
+  saveData(): Observable<any> {
     // fs.writeFileSync(filename, JSON.stringify(content));
-    this.http.put('https://contactapp-34a85.firebaseio.com/data.json',
-    this.contactservice.getContacts()).subscribe(
-    (response => console.log(response)));
+    return this.http.put('https://contactapp-34a85.firebaseio.com/data.json',
+    this.contactservice.getContacts());
   }
 }

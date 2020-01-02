@@ -15,13 +15,13 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    firebase.initializeApp(
-      {
-        apiKey: '',
-        authDomain: 'contactapp-34a85.firebaseapp.com',
-        databaseURL: 'https://contactapp-34a85.firebaseio.com',
-      }
-    );
+    // firebase.initializeApp(
+    //   {
+    //     apiKey: '',
+    //     authDomain: 'contactapp-34a85.firebaseapp.com',
+    //     databaseURL: 'https://contactapp-34a85.firebaseio.com',
+    //   }
+    // );
     this.sservice.getData();
   }
 
